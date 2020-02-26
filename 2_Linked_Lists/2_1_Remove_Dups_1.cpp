@@ -105,6 +105,7 @@ int main()
         insert(element);
     }
     printList();
+    printList();
 
     set<int> record;
     Node* cur = nil->next;
