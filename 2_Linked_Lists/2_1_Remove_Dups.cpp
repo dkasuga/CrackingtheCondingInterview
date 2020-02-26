@@ -106,26 +106,15 @@ int main()
     }
     printList();
 
-    map<int, int> record;
+    set<int> record;
     Node* cur = nil->next;
     while (cur != nil) {
         if (!record.count(cur->key))
-            record[cur->key] = 1;
+            record.insert(cur->key);
         else {
-            record[cur->key]++;
-        }
-        cur = cur->next;
-    }
-
-    cur = nil->next;
-    while (cur != nil) {
-        if (record[cur->key] >= 2) {
             cur->next->prev = cur->prev;
             cur->prev->next = cur->next;
-            Node* tmp = cur;
-            cur = cur->next;
-            delete tmp; // ここの挙動を知りたい
-            continue;
+            record.erase(cur->key);
         }
         cur = cur->next;
     }
