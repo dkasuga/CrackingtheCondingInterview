@@ -34,6 +34,7 @@ bool isPrindrome(string s)
 int main()
 {
     string s;
+    // 空白も無視して読み込む
     getline(cin, s);
     if (isPrindrome(s))
         cout << "Yes" << endl;
