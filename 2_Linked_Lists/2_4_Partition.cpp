@@ -61,26 +61,31 @@ void PrintList()
 void Partition1(int key) // 空間
 {
     Node *left_start, *left_end, *right_start, *right_end;
+    left_start = nullptr;
+    right_start = nullptr;
+
     Node* cur = nil;
     while (cur->next != nil) {
-        if (cur->next->key < key && left_start == NULL) {
+        if (cur->next->key < key && left_start == nullptr) {
             left_start = cur->next;
             left_end = cur->next;
-        }
-        if (cur->next->key >= key && right_start == NULL) {
+        } else if (cur->next->key >= key && right_start == nullptr) {
             right_start = cur->next;
             right_end = cur->next;
-        }
-        if (left_start != NULL && cur->key >= key && cur->next->key < key) {
+        } else if (left_start != nullptr && cur->key >= key && cur->next->key < key) {
             left_end->next = cur->next;
             right_end = cur;
-        }
-        if (right_start != NULL && cur->key < key && cur->next->key >= key) {
+        } else if (right_start != nullptr && cur->key < key && cur->next->key >= key) {
             right_end->next = cur->next;
             left_end = cur;
         }
 
         cur = cur->next;
+    }
+    if (cur->key < key)
+        left_end = cur;
+    else {
+        right_end = cur;
     }
 
     left_end->next = right_start;
@@ -98,6 +103,10 @@ int main()
     Insert(8);
     Insert(5);
     Insert(3);
+    Insert(10);
+    Insert(4);
+    Insert(100);
+    Insert(95);
     PrintList();
     Partition1(5);
     PrintList();
